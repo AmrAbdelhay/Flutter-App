@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'onboarding/onboarding_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
    await Firebase.initializeApp();
+
   runApp(const MyApp());
 
 }
