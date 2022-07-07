@@ -1,5 +1,8 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'chatRoom.dart';
@@ -13,6 +16,15 @@ class usersView extends StatefulWidget {
 
 class _usersViewState extends State<usersView> {
   final fireStore = FirebaseFirestore.instance;
+  var currentUser  =  FirebaseAuth.instance.currentUser?.uid;
+
+  void callChatRoomScreen(BuildContext context, String name, String uid) {
+    Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) =>
+                ChatRoom(friendUid: uid, friendName: name)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +65,10 @@ class _usersViewState extends State<usersView> {
                                 Container(
                                   height: 50,
                                   width: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(20),
-                                      color: Colors.grey,
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          '',
-                                        ),
-                                        fit: BoxFit.cover,
-                                      )),
+                                  child: CachedNetworkImage(imageUrl:  snapShot.data?.docs[index]
+                                  ['imageUrl'] ,
+
+                                ),
                                 ),
                                 SizedBox(
                                   width: 15,
