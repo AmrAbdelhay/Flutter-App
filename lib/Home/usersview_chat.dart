@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -53,16 +54,10 @@ class _usersViewState extends State<usersView> {
                                 Container(
                                   height: 50,
                                   width: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(20),
-                                      color: Colors.grey,
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          '',
-                                        ),
-                                        fit: BoxFit.cover,
-                                      )),
+                                  child: CachedNetworkImage(imageUrl:  snapShot.data?.docs[index]
+                                  ['imageUrl'] ,
+
+                                ),
                                 ),
                                 SizedBox(
                                   width: 15,
