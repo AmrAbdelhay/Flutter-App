@@ -36,13 +36,9 @@ class _ProfileState extends State<Profile> {
                 stream: fireStore.collection('Users').where('${currentUser}').snapshots(),
                 builder: (context, currentUser) {
                   return currentUser.hasData
-                      ?ListView.builder(
-                      itemCount: currentUser.data?.docs.length,
-                      itemBuilder: (context, index) {
-                        return
+                      ?ListView(
 
-
-
+                       children: [
                           Column(
                             children: [
                               Container(
@@ -58,10 +54,12 @@ class _ProfileState extends State<Profile> {
                                           alignment: Alignment.bottomRight,
                                           child: Container(
                                             child: CircleAvatar(
+
                                               backgroundColor: Colors.white,
                                               radius: 17,
 
                                               child: Icon(
+
                                                 Icons.camera_alt,
                                                 size: 20,
                                                 color: Color(0xFF404040),
@@ -83,43 +81,42 @@ class _ProfileState extends State<Profile> {
 
                               Container(
 
-                                child: Text(currentUser.data?.docs[index]
-                                ['name'],
+
+                                child: Text(currentUser.connectionState.name,
+
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25,
                                   ),
                                 ),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  print('im pressed');
-                                },
-                                child: Container(
+
+                                 Container(
                                   padding:
                                   EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFEF476F),
+                                    color: Colors.black,
                                     borderRadius:
                                     BorderRadius.all(Radius.circular(20.0)),
                                   ),
                                   child: Text(
                                     'Edit Profile',
                                     style: TextStyle(
-                                      fontFamily: 'SF Pro',
-                                      color: Colors.white,
+                                      fontFamily: 'Mulish',
+                                      color: Colors.amber,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16.0,
                                     ),
                                   ),
                                 ),
-                              ),
+
                             ],
-                          );
+                          ),
+
+                       ]
 
 
 
-                      }
 
                   )
                       : currentUser.hasError
